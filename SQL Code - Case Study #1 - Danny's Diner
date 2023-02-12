@@ -42,7 +42,8 @@ GROUP BY product_name
 ORDER BY most_times_purchased DESC
 LIMIT 1
 
-SELECT  sales.customer_id, COUNT(product_id) as product_count
+SELECT  sales.customer_id, 
+	COUNT(product_id) as product_count
 FROM sales
 LEFT JOIN menu
 USING(product_id)
@@ -125,8 +126,8 @@ GROUP BY 1
 
 --If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
-SELECT 	sales.customer_id,
-		    SUM(CASE WHEN product_name='sushi' THEN (menu.price*20) ELSE (menu.price*10) END) AS points 
+SELECT 	  sales.customer_id,
+	  SUM(CASE WHEN product_name='sushi' THEN (menu.price*20) ELSE (menu.price*10) END) AS points 
 FROM menu
 LEFT JOIN sales
 USING(product_id)
